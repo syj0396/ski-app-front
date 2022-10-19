@@ -6,7 +6,7 @@ export function TopBar() {
         <Container>
             <LeftSide>
                 <BiArrowBack className="backBtn"/>
-                <PageName>자유게시판</PageName>
+                <PageName></PageName>
             </LeftSide>
             <RightSide>
                 <BiBell className="bellBtn"/>

@@ -1,0 +1,18 @@
+{
+    "board": [
+        {
+            "resort": "엘리시안",
+            "board_type": "자유게시판",
+            "title": "지금 사람 많나요?",
+            "username": "예진",
+            "date": "2022-10-18"
+        },
+        {
+            "resort": "엘리시안",
+            "board_type": "자유게시판",
+            "title": "힘들다 헥헥",
+            "username": "유저",
+            "date": "2022-10-18"
+        }
+    ]
+}

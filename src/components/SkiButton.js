@@ -8,21 +8,20 @@ export function SkiButton(props) {
 
     const openResort = () => {
         setResortOpen(true);
-        console.log(resortOpen)
     }
 
     const closeResort = () => {
         setResortOpen(false);
-        console.log(resortOpen);
     }
 
     return (
+        <>
         <Button>
             <Region>{props.region}</Region>
             <ResortName onClick={openResort}>{props.name}</ResortName>
-            <ResortModal open={resortOpen} close={closeResort} header={props.name} />
         </Button>
-        
+        <ResortModal open={resortOpen} close={closeResort} header={props.name} engCity="Seoul" />
+        </>
     )
 }
 

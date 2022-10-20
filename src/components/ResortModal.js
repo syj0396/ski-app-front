@@ -1,48 +1,14 @@
 import axios from 'axios';
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 
 export function ResortModal(props) {
-    const [isLoading, setIsLoading] = useState(true);
-    const [tempCelcius, setTempCelcius] = useState("");
-    const [currentWeather, setCurrentWeather] = useState("");
-    const city = props.engCity;
-    const [icon, setIcon] = useState("");
-    const API_KEY = '465b890d740de2877b1582f311306e35';
-    
-    useEffect(() => {
-        let mounted = true;
-
-        const getWeather = async (city) => {
-            try{
-                const resWeather = await axios.get(
-                    `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
-                );
-
-                if (mounted) {
-                    let _main = resWeather.data.weather[0].main;
-                    let _icon = resWeather.data.weather[0].icon;
-                    let _temp = resWeather.data.main.temp;
-
-                    let _test = "http://openweathermap.org/img/w/" + _icon + ".png";
-
-                    setCurrentWeather(_main);
-                    setIcon(_test);
-                    setTempCelcius(_temp);
-                    setIsLoading(false);
-                } 
-            } catch (error) {
-                console.log("날씨 정보 get 실패");
-                setIsLoading(false);
-            }
-        };
-
-        getWeather(city);
-
-        return () => {
-            mounted = false;
-        }
-    }, []);
+    // const days = ['일', '월', '화', '수', '목', '금', '토', '일', '월', '화', '수', '목', '금', '토'];
+    // const idx = days.indexOf(props.dayState.day);
+    // const days_5 = {
+    //     "tt": days.slice(idx, idx+5),
+    //     "minmax": props.dayState.week,
+    // }
 
     const clickOutside = (e) => {
         if (e.target.className === "openModal skiModal") {
@@ -56,17 +22,43 @@ export function ResortModal(props) {
             <Section>
                 <Header>
                     <div></div>
-                    {props.header}
+                    <div className="modal-resortName">{props.header}</div>
                     <Button onClick={props.close}>&times;</Button>
                 </Header>
 
-                <TempWeather>
-                    {currentWeather}
-                    <br />
-                    {tempCelcius}
-                    <br />
-                    <img src={icon} />
+                
+                {/* {isLoading || error */}
+                    {/* ? <div>Waiting..</div>  */}
+                    {/* :  */}
+                    <TempWeather>
+                        <TempImg src={props.dayState.icon} />
+                        <TempDate>{props.dayState.date} ({props.dayState.day})</TempDate>
+                        <div><TempC>{props.dayState.tempCelcius}&deg;</TempC>
+                        {/* <TempDesc>{props.dayState.currentWeather}</TempDesc> */}
+                        </div>
+                        <div><MaxC>최고 {props.dayState.tempMax}&deg;</MaxC><MinC>최저 {props.dayState.tempMin}&deg;</MinC></div>
                 </TempWeather>
+                {/* } */}
+
+                <WeekWeather>
+                    {
+                        props.dayState.week.map((elem) => (
+                            <EachDay>
+                                <TempDate>{elem.day}</TempDate>
+                                <MaxC>{elem.max}&deg;</MaxC>
+                                <MinC>{elem.min}&deg;</MinC>
+                            </EachDay>
+                        ))
+                    }
+                </WeekWeather>
+
+                <ResortInfo>
+                
+                        <Row><Label>운영 시간</Label><>매일 09:00 ~ 17:00 야간 19:00 ~ 22:00</></Row>
+                        <Row><Label>운영 기간</Label><>연중무휴</></Row>
+                        <Row><Label>이용 요금</Label><Url>https://www.yongpyong.co.kr/kor/skiNboard/introduce.do</Url></Row>
+                        
+                </ResortInfo>
             </Section>
         ): null}
         </div>
@@ -107,6 +99,12 @@ const Header = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    .modal-resortName {
+        font-weight: bold;
+        font-size: 15px;
+        margin-left: 20px;
+    }
 `
 
 const Button = styled.button`
@@ -118,10 +116,73 @@ const Button = styled.button`
 `
 
 const TempWeather = styled.div`
-
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 `
 
-const ResortName = styled.div`
-
+const TempImg = styled.img`
+    width: 90px;
+    height: 90px;
+`
+const TempDate = styled.div`
+    font-weight: bold;
+    font-size: 14px;
+`
+const TempDesc = styled.span`
+    font-size: 14px;
 `
 
+const TempC = styled.span`
+    font-weight: bold;
+    font-size: 20px;
+`
+
+const MaxC = styled.span`
+    font-size: 12px;
+    font-weight: bold;
+    color: #CD5C5C;
+    margin-right: 7px;
+`
+const MinC = styled.span`
+    font-size: 12px;
+    font-weight: bold;
+    color: #447F96;
+    margin-left: 7px;
+`
+
+// 주간 날씨
+const WeekWeather = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    border-top: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+`
+const EachDay = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+`
+
+const ResortInfo = styled.div`
+    border-top: 1px solid #CCCCCC;
+    margin: 20px;
+    padding-top: 20px;
+`
+const Row = styled.div`
+    display: flex;
+    font-size: 12px;
+    padding-bottom: 4px;
+
+`
+const Label = styled.div`
+    margin-right: 9px;
+    font-weight: bold;
+`
+const Url = styled.div`
+    font-size: 9px;
+`

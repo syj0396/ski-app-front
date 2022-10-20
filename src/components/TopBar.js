@@ -17,6 +17,10 @@ export function TopBar() {
 }
 
 const Container = styled.div`
+position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
     background-color: #FAFAFA;
     border-bottom: 0.01rem solid #CCCCCC;
     height: 48px;

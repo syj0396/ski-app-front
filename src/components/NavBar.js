@@ -22,19 +22,19 @@ export function NavBar() {
                 ))
             } */}
         
-            <Link to="/board">
+            <Link to="/board" className="nav-link">
                 <NavList>자유게시판</NavList>
             </Link>
-            <Link to="/board">
+            <Link to="/board" className="nav-link">
                 <NavList>카풀</NavList>
             </Link>
-            <Link to="/">
+            <Link to="/" className="nav-link">
                 <NavList><GrHomeRounded className="navBar-icon" /></NavList>
             </Link>
-            <Link to="/board">
+            <Link to="/board" className="nav-link">
                 <NavList>같이 타요!</NavList>
             </Link>
-            <Link to="/board">
+            <Link to="/board" className="nav-link">
                 <NavList>동호회</NavList>
             </Link>
         </UL>
@@ -56,24 +56,29 @@ const Container = styled.div`
 
 const UL = styled.ul`
     display: flex;
+    justify-content: space-between;
+    padding-top: 5px;
+    padding-left: 30px;
+    padding-right: 30px;
     
+    .nav-link {
+        text-decoration: none;
+    }
 `
 
 const NavList = styled.li`
-    text-decoration: none !important;
     list-style-type: none;
-    color: #CCCCCC;
+    color: gray;
     font-size: 0.9rem;
-    //padding-left: 1rem;
 
     .navBar-icon{
         //position: fixed;
         //bottom: 50;
         width: 1.6rem;
         height: 1.6rem;
-        background-color: #C2CFD8;
-        padding: 0.6rem;
-        border-radius: 20px;
+        //background-color: #C2CFD8;
+        //border-radius: 20px;
+        color: #86B0B4;
     }
 `
 

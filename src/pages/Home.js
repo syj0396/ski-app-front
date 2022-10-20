@@ -3,6 +3,7 @@ import { Card } from "react-bootstrap"
 import img from '../imgs/한반도.png'
 import {FaSkiing} from 'react-icons/fa'
 import { SkiButton } from '../components/SkiButton'
+import resortData from '../data/resort.json'
 
 export function Home() {
     const MyResort = ["엘리시안", "스키장2", "스키장3"];
@@ -41,7 +42,7 @@ export function Home() {
 
             <Map>
                 {
-                    resorts.map(resort => (
+                    resortData.map(resort => (
                         <SkiButton {...resort} />
                     ))
                 }

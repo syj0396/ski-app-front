@@ -1,3 +1,4 @@
+/*
 import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import reduxThunk from "redux-thunk";
@@ -10,5 +11,16 @@ if (process.env.NODE_ENV === "development") {
 }
 
 const store = createStore(rootReducer, applyMiddleware(...middlewares));
+
+export default store;*/
+
+import { configureStore } from '@reduxjs/toolkit'
+import authReducer from './slice/auth';
+
+const store = configureStore({
+    reducer: {
+        auth: authReducer,
+    }
+});
 
 export default store;

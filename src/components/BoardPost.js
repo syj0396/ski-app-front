@@ -1,16 +1,19 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { HiPencil } from 'react-icons/hi'
 import { BsTrashFill, BsFilePost } from 'react-icons/bs'
 import { AiOutlineLike } from 'react-icons/ai'
 
 function BoardPost() {
+    const isAuth = useSelector(state => state.auth.isAuthenticated);
+    const dispatch = useDispatch();
     return (
         <PostContainer>
             <Top>
                 <SkiName>[스키장 이름]</SkiName>
                 <div>
-                    <HiPencil className="boardPost-icon"/>
+                    {isAuth && <HiPencil className="boardPost-icon"/>}
                     <BsTrashFill className="boardPost-icon"/>
                 </div>
             </Top>

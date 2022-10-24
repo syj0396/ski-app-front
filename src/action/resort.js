@@ -4,7 +4,7 @@ import { resortActions } from '../slice/resort';
 export const loadResorts = () => {
     return function (dispatch) {
         axios
-            .get(`${process.env.REACT_APP_API}`)
+            .get(`${process.env.REACT_APP_API}/resort`)
             .then((resp) => {
                 dispatch(resortActions.getResorts(resp.data));
             })

@@ -16,12 +16,14 @@ export default store;*/
 
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './slice/auth';
+import boardSlice from './slice/board';
 import resortSlice from './slice/resort';
 
 const store = configureStore({
     reducer: {
         auth: authReducer,
         resort: resortSlice.reducer,
+        board: boardSlice.reducer,
     }
 });
 

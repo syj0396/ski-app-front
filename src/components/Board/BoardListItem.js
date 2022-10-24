@@ -1,27 +1,54 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { HiPencil } from 'react-icons/hi'
 import { BsTrashFill, BsFilePost } from 'react-icons/bs'
 import { AiOutlineLike } from 'react-icons/ai'
 
-function BoardListItem() {
+function BoardListItem(props) {
     const isAuth = useSelector(state => state.auth.isAuthenticated);
     const dispatch = useDispatch();
+
+    const [timePass, setTimePass] = useState("");
+    //const [current, setCurrent] = useState(new Date());
+
+    const detailDate = (create_dt) => {
+        const milliSeconds = new Date() - Date.parse(create_dt);
+        const seconds = milliSeconds / 1000;
+        if (seconds < 60) return "방금 전";
+        const minutes = seconds / 60;
+        if (minutes < 60) return `${Math.floor(minutes)}분 전`;
+        const hours = minutes / 60;
+        if (hours < 24) return `${Math.floor(hours)}시간 전`;
+        const days = hours / 24;
+        if (days < 7) return `${Math.floor(days)}일 전`;
+        const weeks = days / 7;
+        if (weeks < 5) return `${Math.floor(weeks)}주 전`;
+        const months = days / 30;
+		if (months < 12) return `${Math.floor(months)}개월 전`;
+		const years = days / 365;
+		return `${Math.floor(years)}년 전`;
+
+    }
+
+    useEffect(() => {
+        setTimePass(detailDate(props.create_dt));
+    }, []);
+
     return (
         <PostContainer>
             <Top>
-                <SkiName>[스키장 이름]</SkiName>
+                <SkiName>{props.resortName}</SkiName>
                 <div>
                     {isAuth && <HiPencil className="boardPost-icon"/>}
-                    <BsTrashFill className="boardPost-icon"/>
+                    {isAuth && <BsTrashFill className="boardPost-icon"/>}
                 </div>
             </Top>
             <Content>
                 <Img>{/*<BsFilePost className="boardPost-imgIcon" />*/}</Img>
                 <div>
-                    <Title>시즌권 양도합니다</Title>
-                    <Detail>와이어프레임에는 없지만 세부 내용이 들어간다면..</Detail>
+                    <Title>{props.title}</Title>
+                    <Detail>{props.content}</Detail>
                 </div>
             </Content>
             <Bottom>
@@ -30,7 +57,7 @@ function BoardListItem() {
                     <AiOutlineLike className="boardPost-likeIcon"/>
                     <LikeCnt>5</LikeCnt>
                     <div className="boardPost-bottomText">작성자</div>
-                    <div className="boardPost-bottomText">3분 전</div>
+                    <div className="boardPost-bottomText">{timePass}</div>
                 </Real>
             </Bottom>
             

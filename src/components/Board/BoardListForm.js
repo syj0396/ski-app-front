@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { BiSearch } from 'react-icons/bi'
 
-function BoardForm(props) {
+function BoardListForm(props) {
     const [input, setInput] = useState('');
 
     const handleChange = e => {
@@ -21,23 +22,39 @@ function BoardForm(props) {
 
     }
     return (
-        <Form onSubmit={handleSubmit}>
-            <input
-                type='text'
-                placeholder='스키장 이름, 글 제목, 단어 검색'
-                value={input}
-                name='text'
-                className='boardForm-input'
-                onChange={handleChange}
-            />
-            <button><BiSearch className='board-searchBtn' /></button>
-        </Form>
+        <Wrapper>
+            <Top>
+                <Link to="/board/write"><Button>글쓰기</Button></Link>
+            </Top>
+            <Form onSubmit={handleSubmit}>
+                <input
+                    type='text'
+                    placeholder='스키장 이름, 글 제목, 단어 검색'
+                    value={input}
+                    name='text'
+                    className='boardForm-input'
+                    onChange={handleChange}
+                />
+                <button><BiSearch className='board-searchBtn' /></button>
+            </Form>
+        </Wrapper>
+        
     )
 }
 
+const Wrapper = styled.form`
+padding: 20px 20px 20px 20px;
+`
+const Top = styled.div`
+
+`
+const Button = styled.button`
+
+`
+
 const Form = styled.form`
     display: flex;
-    padding: 20px 20px 20px 20px;
+    
 
     .boardForm-input {
         flex: 1 1;
@@ -61,4 +78,4 @@ const Form = styled.form`
     }
 `
 
-export default BoardForm
+export default BoardListForm

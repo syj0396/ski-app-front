@@ -5,7 +5,7 @@ import { HiPencil } from 'react-icons/hi'
 import { BsTrashFill, BsFilePost } from 'react-icons/bs'
 import { AiOutlineLike } from 'react-icons/ai'
 
-function BoardPost() {
+function BoardListItem() {
     const isAuth = useSelector(state => state.auth.isAuthenticated);
     const dispatch = useDispatch();
     return (
@@ -118,4 +118,4 @@ const LikeCnt = styled.div`
     font-size: 0.7rem;
 `
 
-export default BoardPost
+export default BoardListItem

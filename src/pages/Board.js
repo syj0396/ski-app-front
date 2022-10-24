@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components'
-import BoardForm from '../components/BoardForm'
-import BoardPost from '../components/BoardPost';
+import BoardForm from '../components/Board/BoardListForm'
+import BoardPost from '../components/Board/BoardListItem';
 
 export function Board() {
     const [posts, setPosts] = useState([]);
@@ -21,4 +21,5 @@ export function Board() {
 
 const BoardContainer = styled.div`
     color: black;
+    margin-top: 20px;
 `

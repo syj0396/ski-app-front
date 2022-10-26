@@ -29,7 +29,6 @@ export function SkiButton(props) {
 
     const getWeather = async (lat, lon) => {
         try{
-            console.log("count");
             //현재 날씨 정보
             const resWeather = await axios.get(
                 //`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`

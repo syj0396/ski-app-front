@@ -16,10 +16,12 @@ export function Board() {
     return(
         <BoardContainer>
             <BoardListForm />
+            <POSTS>
             {posts && posts.slice(0).reverse().map((post) => (
                 <BoardListItem key={post.id} {...post} />
             ))
             }
+            </POSTS>
         </BoardContainer>
     )
 }
@@ -27,4 +29,7 @@ export function Board() {
 const BoardContainer = styled.div`
     color: black;
     margin-top: 20px;
+`
+const POSTS = styled.div`
+    margin-top: 260px;
 `

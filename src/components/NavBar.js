@@ -4,14 +4,8 @@ import styled from 'styled-components'
 import {GrHomeRounded} from 'react-icons/gr'
 
 export function NavBar() {
-    const Menus = [
-        { name: "자유게시판", dis: "translate-x-0" },
-        { name: "카풀", dis: "translate-x" },
-        { name: "HOME", dis: "" },
-        { name: "같이 타요!", dis: "" },
-        { name: "동호회", dis: "" }
-    ]
-  return (
+
+    return (
     <Container>
         <UL>
             {/* {
@@ -34,12 +28,12 @@ export function NavBar() {
             <Link to="/board" className="nav-link">
                 <NavList>같이 타요!</NavList>
             </Link>
-            <Link to="/board" className="nav-link">
+            <Link to="/club" className="nav-link">
                 <NavList>동호회</NavList>
             </Link>
         </UL>
     </Container>
-  )
+    )
 }
 
 const Container = styled.div`

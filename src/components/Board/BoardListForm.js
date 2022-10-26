@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { BiSearch } from 'react-icons/bi'
 
-function BoardListForm(props) {
+function BoardListForm() {
+    const resorts = useSelector(state => state.resort.resorts);
     const [input, setInput] = useState('');
 
     const handleChange = e => {
@@ -23,9 +25,12 @@ function BoardListForm(props) {
     }
     return (
         <Wrapper>
-            <Top>
-                <Link to="/board/write"><Button>글쓰기</Button></Link>
-            </Top>
+            <ResortBtn>
+                <div></div><Resort>[전체]</Resort><Link to="/board/write"><Button>글쓰기</Button></Link>
+                {resorts.map(resort => (
+                    <Resort key={resort.id}>{resort.name}</Resort>
+                ))}
+            </ResortBtn>
             <Form onSubmit={handleSubmit}>
                 <input
                     type='text'
@@ -42,19 +47,35 @@ function BoardListForm(props) {
     )
 }
 
-const Wrapper = styled.form`
-padding: 20px 20px 20px 20px;
-`
-const Top = styled.div`
+const Wrapper = styled.div`
+padding: 60px 20px 20px 20px;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
 
+`
+const ResortBtn = styled.div`
+display:grid;
+grid-template-columns: 1fr 1fr 1fr;
+align-items: center;
+background-color: white;
+`
+const Resort = styled.div`
+font-size: 12px;
+text-align: center;
+margin: 5px;
+border-bottom: 1px solid #CCCCCC;
+padding: 5px;
 `
 const Button = styled.button`
-
 `
 
 const Form = styled.form`
     display: flex;
-    
+    padding-top: 10px;
+    background-color: white;
+    padding-bottom: 20px;
 
     .boardForm-input {
         flex: 1 1;

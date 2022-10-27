@@ -1,11 +1,17 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { loadPosts } from '../action/club';
 import styled from 'styled-components'
 import { Card } from "react-bootstrap"
 import img from '../imgs/한반도.png'
 import {FaSkiing} from 'react-icons/fa'
 import { SkiButton } from '../components/SkiButton'
 import resortData from '../data/resort.json'
+import { useEffect, useState } from 'react'
 
 export function Home() {
+    const dispatch = useDispatch();
+    const posts = useSelector(state => state.board.posts);
+    const [top3, setTop3] = useState([]);
     const MyResort = ["엘리시안", "스키장2", "스키장3"];
     const resorts = [
         {"region": "경기", "name": "엘리시안"},
@@ -14,6 +20,11 @@ export function Home() {
         {"region": "경기", "name": "엘리시안"},
         {"region": "경기", "name": "엘리시안"},
     ];
+
+    useEffect(() => {
+        dispatch(loadPosts());
+        if (posts) setTop3(posts.slice(-3).reverse());
+    }, [dispatch]);
     return(
         <Container>
             <Wrapper>
@@ -21,6 +32,9 @@ export function Home() {
                 <BoardBox>
                     {/* loadPost(id)로 최근 3개 불러와서, 배열에 저장? */}
                     {/* 배열로 map */}
+                    {top3 && top3.map(post => (
+                        <Row><div>{post.title}</div></Row>
+                    ))}
                 </BoardBox>
             </Wrapper>
 
@@ -70,7 +84,8 @@ box-shadow: 10px 7px 12px -2px rgba(17, 20, 24, 0.15);
 
 height: 150px;
 `
-
+const Row = styled.div`
+`
 const Box = styled.div`
 display: flex;
 border-radius: 10px;

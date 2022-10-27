@@ -79,7 +79,7 @@ export function BoardWrite() {
 
     return (
     <Wrapper>
-        <div className="write-top">글 작성</div>
+        <div className="boardWrite-top">글 작성</div>
         <form onSubmit={handleSubmit}>
         <Top>
             <SelectBox>
@@ -95,6 +95,7 @@ export function BoardWrite() {
                     </div>}
                 </div>
             </SelectBox>
+            {/* <SelectBox toggle={toggleSelectBox} state={showSelectBox} list={resorts} /> */}
             <Title>
                 <input 
                     className="boardWrite-title"
@@ -134,7 +135,7 @@ const Wrapper = styled.div`
     }
 
 
-    .write-top{
+    .boardWrite-top{
         text-align: center;
         font-weight: bold;
         margin-bottom: 10px;

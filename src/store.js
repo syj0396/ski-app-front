@@ -17,6 +17,7 @@ export default store;*/
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from './slice/auth';
 import boardSlice from './slice/board';
+import clubSlice from './slice/club';
 import resortSlice from './slice/resort';
 
 const store = configureStore({
@@ -24,6 +25,7 @@ const store = configureStore({
         auth: authReducer,
         resort: resortSlice.reducer,
         board: boardSlice.reducer,
+        club: clubSlice.reducer,
     }
 });
 

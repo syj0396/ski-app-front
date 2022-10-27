@@ -8,6 +8,7 @@ import { Board } from "./pages/Board"
 import { Club } from "./pages/Club"
 import { BoardWrite } from "./components/Board/BoardWrite"
 import { loadResorts } from './action/resort';
+import { ClubRegister } from './components/Club/ClubRegister';
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function App() {
         <Route exact path="/board" element={<Board />} />
         <Route exact path="/board/write" element={<BoardWrite />} />
         <Route exact path="/club" element={<Club />} />
+        <Route exact path="/club/register" element={<ClubRegister />} />
       </Routes>
       <NavBar />
     </div>

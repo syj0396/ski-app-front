@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export function ClubListForm() {
@@ -17,7 +18,7 @@ export function ClubListForm() {
             ))}
         </ResortBtn>
         <Top>
-            <div></div><div className="clubList-title">동호회 리스트</div><div className="clubList-plus">+</div>
+            <div></div><div className="clubList-title">동호회 리스트</div><Link to="/club/register"><div className="clubList-plus" >+</div></Link>
         </Top>
     </Wrapper>
     )

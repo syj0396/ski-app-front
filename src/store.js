@@ -14,19 +14,24 @@ const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 export default store;*/
 
-import { configureStore } from '@reduxjs/toolkit'
-import authReducer from './slice/auth';
+import { configureStore } from '@reduxjs/toolkit';
 import boardSlice from './slice/board';
 import clubSlice from './slice/club';
 import resortSlice from './slice/resort';
+import { apiSlice } from './app/api/apiSlice';
+import authSlice from './features/auth/authSlice';
 
 const store = configureStore({
     reducer: {
-        auth: authReducer,
         resort: resortSlice.reducer,
         board: boardSlice.reducer,
         club: clubSlice.reducer,
-    }
+        [apiSlice.reducerPath]: apiSlice.reducer,
+        auth: authSlice.reducer,
+    },
+    middleware: getDefaultMiddleware =>
+        getDefaultMiddleware().concat(apiSlice.middleware),
+    devTools: true
 });
 
 export default store;

@@ -6,7 +6,8 @@ import { BsTrashFill, BsFilePost } from 'react-icons/bs'
 import { AiOutlineLike } from 'react-icons/ai'
 
 function BoardListItem(props) {
-    const isAuth = useSelector(state => state.auth.isAuthenticated);
+    const token = useSelector(state => state.auth.token);
+    const user = useSelector(state => state.auth.user);
     const dispatch = useDispatch();
 
     const [timePass, setTimePass] = useState("");
@@ -40,8 +41,8 @@ function BoardListItem(props) {
             <Top>
                 <SkiName>{props.resortName}</SkiName>
                 <div>
-                    {isAuth && <HiPencil className="boardPost-icon"/>}
-                    {isAuth && <BsTrashFill className="boardPost-icon"/>}
+                    {token && <HiPencil className="boardPost-icon"/>}
+                    {token && <BsTrashFill className="boardPost-icon"/>}
                 </div>
             </Top>
             <Content>
@@ -56,7 +57,7 @@ function BoardListItem(props) {
                 <Real>
                     <AiOutlineLike className="boardPost-likeIcon"/>
                     <LikeCnt>5</LikeCnt>
-                    <div className="boardPost-bottomText">작성자</div>
+                    <div className="boardPost-bottomText">{user}</div>
                     <div className="boardPost-bottomText">{timePass}</div>
                 </Real>
             </Bottom>

@@ -8,16 +8,31 @@ import BoardListItem from '../components/Board/BoardListItem';
 export function Board() {
     const dispatch = useDispatch();
     const posts = useSelector(state => state.board.posts);
+    const [selectedResort, setSelectedResort] = useState("[전체]"); 
+    const [filteredResorts, setFilteredResorts] = useState(posts); 
+
+    const changeSelection = (resort) => {
+        setSelectedResort(resort);
+    }
 
     useEffect(() => {
         dispatch(loadPosts());
     }, [dispatch]);
 
+    useEffect(() => {
+        if (selectedResort === "[전체]") setFilteredResorts(posts);
+        else {
+            let filteredResort = posts.filter(post => post.resortName === selectedResort);
+            setFilteredResorts(filteredResort);
+        }
+
+    }, [selectedResort, posts])
+
     return(
         <BoardContainer>
-            <BoardListForm />
+            <BoardListForm change={changeSelection} />
             <POSTS>
-            {posts && posts.slice(0).reverse().map((post) => (
+            {filteredResorts && filteredResorts.slice(0).reverse().map((post) => (
                 <BoardListItem key={post.id} {...post} />
             ))
             }
@@ -27,9 +42,10 @@ export function Board() {
 }
 
 const BoardContainer = styled.div`
+background-color: white;
     color: black;
-    margin-top: 20px;
+    padding-top: 20px;
 `
 const POSTS = styled.div`
-    margin-top: 260px;
+    padding-top: 260px;
 `

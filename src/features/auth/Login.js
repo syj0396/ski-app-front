@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from './authSlice'
 import { useLoginMutation } from './authApiSlice'
+import { loginAction } from '../../action/test'
 
 export function Login() {
     const userRef = useRef();
@@ -27,12 +28,14 @@ export function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const userData = await login({ user, pw}).unwrap();
-            console.log(userData);
-            dispatch(setCredentials({ ...userData, user }))
-            setUser('')
-            setPw('')
-            navigate('/')
+            // const userData = await login({ user, pw}).unwrap();
+            // console.log(userData);
+            // dispatch(setCredentials({ ...userData, user }))
+            // setUser('')
+            // setPw('')
+            // navigate('/')
+            const userData = {user, pw};
+            dispatch(loginAction(userData));
         } catch (err) {
             if (!err?.originalStatus) {
                 setErrMsg('No Server Response');

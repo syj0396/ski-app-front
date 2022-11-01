@@ -15,6 +15,8 @@ import { ClubRegister } from './components/Club/ClubRegister';
 
 function App() {
   const dispatch = useDispatch();
+  //const cors = require('cors');
+  //App.use(cors())
 
   useEffect(() => {
     dispatch(loadResorts());

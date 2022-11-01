@@ -4,9 +4,14 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { BiSearch } from 'react-icons/bi'
 
-function BoardListForm() {
+function BoardListForm(props) {
     const resorts = useSelector(state => state.resort.resorts);
     const [input, setInput] = useState('');
+
+    const changeParent = e => {
+        console.log(e.target.innerText);
+        props.change(e.target.innerText);
+    }
 
     const handleChange = e => {
         setInput(e.target.value);
@@ -26,9 +31,9 @@ function BoardListForm() {
     return (
         <Wrapper>
             <ResortBtn>
-                <div></div><Resort>[전체]</Resort><Link to="/board/write"><Button>글쓰기</Button></Link>
+                <div></div><Resort onClick={changeParent}>[전체]</Resort><Link to="/board/write"><Button>글쓰기</Button></Link>
                 {resorts.map(resort => (
-                    <Resort key={resort.id}>{resort.name}</Resort>
+                    <Resort key={resort.id} onClick={changeParent}>{resort.name}</Resort>
                 ))}
             </ResortBtn>
             <Form onSubmit={handleSubmit}>

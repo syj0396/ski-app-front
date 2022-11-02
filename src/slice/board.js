@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     posts: [],
+    post: {},
 }
 const boardSlice = createSlice({
     name: 'board',
@@ -12,6 +13,15 @@ const boardSlice = createSlice({
         },
         addBoard(state) {
 
+        },
+        getPost(state, action) {
+            state.post = action.payload;
+        },
+        editPost(state) {
+
+        },
+        deletePost(state) {
+            
         }
     }
 });

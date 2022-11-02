@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { HiPencil } from 'react-icons/hi'
 import { BsTrashFill, BsFilePost } from 'react-icons/bs'
 import { AiOutlineLike } from 'react-icons/ai'
+import { deletePost } from '../../action/board'
 
 function BoardListItem(props) {
     const token = useSelector(state => state.auth.token);
     const user = useSelector(state => state.auth.user);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [timePass, setTimePass] = useState("");
     //const [current, setCurrent] = useState(new Date());
@@ -31,6 +34,18 @@ function BoardListItem(props) {
 		return `${Math.floor(years)}년 전`;
 
     }
+    const handlePencil = e => {
+        navigate(`/board/edit/${props.id}`);
+    }
+
+    const handleTrash = e => {
+        dispatch(deletePost(props.id));
+    }
+
+    const showDetail = e => {
+        //console.log("show");
+        navigate(`/board/detail/${props.id}`);
+    }
 
     useEffect(() => {
         setTimePass(detailDate(props.create_dt));
@@ -41,11 +56,11 @@ function BoardListItem(props) {
             <Top>
                 <SkiName>{props.resortName}</SkiName>
                 <div>
-                    {token && <HiPencil className="boardPost-icon"/>}
-                    {token && <BsTrashFill className="boardPost-icon"/>}
+                    {token && <HiPencil className="boardPost-icon" onClick={handlePencil}/>}
+                    {token && <BsTrashFill className="boardPost-icon" onClick={handleTrash}/>}
                 </div>
             </Top>
-            <Content>
+            <Content onClick={showDetail}>
                 <Img>{/*<BsFilePost className="boardPost-imgIcon" />*/}</Img>
                 <div>
                     <Title>{props.title}</Title>

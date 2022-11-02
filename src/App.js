@@ -10,8 +10,10 @@ import { RequireAuth } from './features/auth/RequireAuth';
 import { Board } from "./pages/Board"
 import { Club } from "./pages/Club"
 import { BoardWrite } from "./components/Board/BoardWrite"
+import { EditBoard } from './components/Board/EditBoard';
 import { loadResorts } from './action/resort';
 import { ClubRegister } from './components/Club/ClubRegister';
+import { BoardDetail } from './components/Board/BoardDetail';
 
 function App() {
   const dispatch = useDispatch();
@@ -40,6 +42,8 @@ function App() {
           <Route element={<RequireAuth />}>
             <Route path="board" element={<Board />} />
             <Route path="board/write" element={<BoardWrite />} />
+            <Route path="board/edit/:id" element={<EditBoard />} />
+            <Route path="board/detail/:id" element={<BoardDetail />} />
             <Route path="club" element={<Club />} />
             <Route path="club/register" element={<ClubRegister />} />
           </Route>

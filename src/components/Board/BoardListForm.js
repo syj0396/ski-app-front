@@ -9,7 +9,6 @@ function BoardListForm(props) {
     const [input, setInput] = useState('');
 
     const changeParent = e => {
-        console.log(e.target.innerText);
         props.change(e.target.innerText);
     }
 

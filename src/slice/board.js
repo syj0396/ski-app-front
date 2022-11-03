@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     posts: [],
-    post: {},
+    post: null,
 }
 const boardSlice = createSlice({
     name: 'board',

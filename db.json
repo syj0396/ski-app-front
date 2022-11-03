@@ -5,6 +5,9 @@
       "content": "먼저 가신 분들~~ 오늘 춥나요?",
       "resortName": "비발디파크",
       "create_dt": "2022-10-24T16:33:44.936Z",
+      "cnt": 0,
+      "like": 0,
+      "comments": [],
       "id": 1
     },
     {
@@ -19,6 +22,9 @@
       "content": "타다가 넘어졌는데 넘 아파요..",
       "resortName": "엘리시안",
       "create_dt": "2022-10-26T16:47:15.836Z",
+      "cnt": 0,
+      "like": 0,
+      "comments": [],
       "id": 3
     },
     {
@@ -26,7 +32,40 @@
       "content": "재밌어 재밌어!!",
       "resortName": "베어스타운",
       "create_dt": "2022-10-27T12:19:35.572Z",
+      "cnt": 0,
+      "like": 0,
+      "comments": [],
       "id": 4
+    },
+    {
+      "title": "사용자 아이디",
+      "content": "사용자 아이디가 들어가는지 체크",
+      "resortName": "베어스타운",
+      "create_dt": "2022-11-02T08:58:14.607Z",
+      "cnt": 0,
+      "like": 0,
+      "comments": [],
+      "id": 5
+    },
+    {
+      "title": "안녕하세요!",
+      "content": "안녕안녕 스키 타러 왔어요~~!\n스키 초보자입니다!",
+      "resortName": "비발디파크",
+      "create_dt": "2022-11-02T14:55:58.473Z",
+      "cnt": 0,
+      "like": 0,
+      "comments": [],
+      "id": 6
+    },
+    {
+      "title": "좋아요랑 조회수 추가",
+      "content": "디비에 어떤 타입으로 찍힐까요?",
+      "resortName": "베어스타운",
+      "create_dt": "2022-11-02T15:03:36.463Z",
+      "cnt": 0,
+      "like": 0,
+      "comments": [],
+      "id": 7
     }
   ],
   "resort": [

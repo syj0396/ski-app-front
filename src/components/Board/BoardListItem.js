@@ -32,7 +32,6 @@ function BoardListItem(props) {
 		if (months < 12) return `${Math.floor(months)}개월 전`;
 		const years = days / 365;
 		return `${Math.floor(years)}년 전`;
-
     }
     const handlePencil = e => {
         navigate(`/board/edit/${props.id}`);
@@ -72,7 +71,7 @@ function BoardListItem(props) {
                 <Real>
                     <AiOutlineLike className="boardPost-likeIcon"/>
                     <LikeCnt>5</LikeCnt>
-                    <div className="boardPost-bottomText">{user}</div>
+                    <div className="boardPost-bottomText">{user.username}</div>
                     <div className="boardPost-bottomText">{timePass}</div>
                 </Real>
             </Bottom>

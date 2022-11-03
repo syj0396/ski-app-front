@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { loadPosts } from '../action/club';
+import { loadPosts } from '../action/board';
 import styled from 'styled-components'
 import { Card } from "react-bootstrap"
 import img from '../imgs/한반도.png'

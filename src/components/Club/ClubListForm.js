@@ -3,18 +3,21 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-export function ClubListForm() {
+export function ClubListForm(props) {
     //스키장 state 받아와서 grid에 표시
     //동호회 리스트   +
     const resorts = useSelector(state => state.resort.resorts);
 
+    const changeParent = e => {
+        props.change(e.target.innerText);
+    }
 
     return (
     <Wrapper>
         <ResortBtn>
-            <div></div><Resort>[전체]</Resort><div></div>
+            <div></div><Resort onClick={changeParent}>[전체]</Resort><div></div>
             {resorts.map(resort => (
-                <Resort key={resort.id}>{resort.name}</Resort>
+                <Resort key={resort.id} onClick={changeParent}>{resort.name}</Resort>
             ))}
         </ResortBtn>
         <Top>
@@ -46,7 +49,7 @@ padding: 5px;
 const Top = styled.div`
 display: flex;
 justify-content: space-between;
-padding: 30px 50px;
+padding: 20px 50px;
 .clubList-title{
     font-weight: bold;
     padding-top: 13px;

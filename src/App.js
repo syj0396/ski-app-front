@@ -14,6 +14,8 @@ import { EditBoard } from './components/Board/EditBoard';
 import { loadResorts } from './action/resort';
 import { ClubRegister } from './components/Club/ClubRegister';
 import { BoardDetail } from './components/Board/BoardDetail';
+import { ClubDetail } from './components/Club/ClubDetail';
+import { ClubSecret } from './components/Club/ClubSecret';
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +48,8 @@ function App() {
             <Route path="board/detail/:id" element={<BoardDetail />} />
             <Route path="club" element={<Club />} />
             <Route path="club/register" element={<ClubRegister />} />
+            <Route path="club/detail/:id" element={<ClubDetail />} />
+            <Route path="club/secret/:id" element={<ClubSecret />} />
           </Route>
         </Route>
       </Routes>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { clubActions } from '../slice/club';
 
-export const loadPosts = () => {
+export const loadClubs = () => {
     return function (dispatch) {
         axios
             .get(`${process.env.REACT_APP_API}/club`)
@@ -21,5 +21,16 @@ export const regClub = (post) => {
                 dispatch(clubActions.createClub());
                 //dispatch(loadPosts)
             })
+    }
+}
+
+export const getSingleClub = (id) => {
+    return function (dispatch) {
+        axios
+            .get(`${process.env.REACT_APP_API}/club/${id}`)
+            .then((resp) => {
+                dispatch(clubActions.getClub(resp.data));
+            })
+            .catch(error => console.log(error));
     }
 }

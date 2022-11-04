@@ -4,21 +4,28 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getSingleClub } from '../../action/club';
 import styled from 'styled-components';
 
+import { register } from '../../action/register';
+
 export function ClubDetail() {
     const dispatch = useDispatch();
     const club = useSelector(state => state.club.club);
     let {id} = useParams();
+
+    const testApi = e => {
+        dispatch(register());
+    }
 
     useEffect(() => {
         if (id) {
             dispatch(getSingleClub(id));
         }
     }, [dispatch, id]);
+
     return (
     <>
     {club && 
     <Container>
-        <ClubName>{club.club_nm}</ClubName>
+        <ClubName onClick={testApi}>{club.club_nm}</ClubName>
         <ClubResort>{club.resort_id}</ClubResort>
         <TopLine>게시판</TopLine>
         <NoticeBox>

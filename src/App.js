@@ -30,15 +30,11 @@ function App() {
     <div>
       <TopBar />
       <Routes>
-        {/* <Route exact path="/" element={<Home />} />
-        <Route exact path="/board" element={<Board />} />
-        <Route exact path="/board/write" element={<BoardWrite />} />
-        <Route exact path="/club" element={<Club />} />
-        <Route exact path="/club/register" element={<ClubRegister />} /> */}
         <Route path="/" element={<Layout />}>
           {/* public routes */}
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
+          {/* 나중에 회원가입 창도 추가 */}
 
           {/* protected routes */}
           <Route element={<RequireAuth />}>

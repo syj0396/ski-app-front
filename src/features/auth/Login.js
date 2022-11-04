@@ -1,10 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-import { useDispatch } from 'react-redux'
-import { setCredentials } from './authSlice'
-import { useLoginMutation } from './authApiSlice'
-import { loginAction } from '../../action/test'
+import { useDispatch, useSelector } from 'react-redux'
+//import { setCredentials } from './authSlice'
+//import { useLoginMutation } from './authApiSlice'
+//import { loginAction } from '../../action/test'
+import { login } from '../../action/auth';
 
 export function Login() {
     const userRef = useRef();
@@ -13,8 +14,10 @@ export function Login() {
     const [pw, setPw] = useState('');
     const [errMsg, setErrMsg] = useState('');
     const navigate = useNavigate();
+    const { state } = useLocation();
+    const isLoading = useSelector(state => state.auth.isLoading);
 
-    const [login, { isLoading }] = useLoginMutation();
+    //const [login, { isLoading }] = useLoginMutation();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -25,17 +28,28 @@ export function Login() {
         setErrMsg('');
     }, [user, pw]);
 
+    useEffect(() => {
+        if (!isLoading) {
+            //원래 가려던 페이지가 있다면 그곳으로, 없다면 홈으로.
+            if (state) {
+                navigate(state);
+            } else {
+                navigate('/');
+            }
+        }
+    }, [isLoading]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // const userData = await login({ user, pw}).unwrap();
-            // console.log(userData);
-            // dispatch(setCredentials({ ...userData, user }))
-            // setUser('')
-            // setPw('')
-            // navigate('/')
-            const userData = {user, pw};
-            dispatch(loginAction(userData));
+            const userData = {
+                username: user, 
+                password: pw
+            };
+            dispatch(login(userData));
+            setUser('');
+            setPw('');
+            
         } catch (err) {
             if (!err?.originalStatus) {
                 setErrMsg('No Server Response');
@@ -54,7 +68,7 @@ export function Login() {
 
     const handlePwInput = (e) => setPw(e.target.value);
 
-    const content = isLoading ? <h1>Loading...</h1> : (
+    const content = //isLoading ? <h1>Loading...</h1> : (
         <section className="login">
             <p ref={errRef} className={errMsg ? "reemsg": "offscreen"} aria-live="assertive">{errMsg}</p>
         
@@ -83,7 +97,7 @@ export function Login() {
                 <button>Sign In</button>
             </form>
         </section>
-    )
+    //)
 
     return content
 }

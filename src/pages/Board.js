@@ -20,7 +20,7 @@ export function Board() {
     }, [dispatch]);
 
     useEffect(() => {
-        if (selectedResort === "[전체]") setFilteredResorts(posts);
+        if (selectedResort === "[전체]") {setFilteredResorts(posts);}
         else {
             let filteredResort = posts.filter(post => post.resortName === selectedResort);
             setFilteredResorts(filteredResort);
@@ -32,7 +32,8 @@ export function Board() {
         <BoardContainer>
             <BoardListForm change={changeSelection} />
             <POSTS>
-            {filteredResorts && filteredResorts.slice(0).reverse().map((post) => (
+            {/* {filteredResorts.length > 0 && filteredResorts.slice(0).reverse().map((post) => ( */}
+            {filteredResorts.length > 0 && filteredResorts.map((post) => (
                 <BoardListItem key={post.id} {...post} />
             ))
             }

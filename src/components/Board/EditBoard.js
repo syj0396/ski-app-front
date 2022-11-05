@@ -84,7 +84,7 @@ export function EditBoard() {
                 title: enteredTitle,
                 content: enteredContent,
                 resortName: selectedResort,
-                create_dt: originalPost.create_dt,
+                //create_dt: originalPost.create_dt,
             }
             dispatch(updatePost(post, id));
             navigate("/board");

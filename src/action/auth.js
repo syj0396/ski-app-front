@@ -1,8 +1,15 @@
 import axios from 'axios';
 import { authActions } from '../slice/auth';
+import Send from '../components/common/Send';
+
+// export const testInstance = axios.create({
+//     baseURL: 'http://localhost:8080/api',
+//     withCredentials: true,
+// })
 
 export const login = (user) => {
     return function (dispatch) {
+        
         axios(
             {
                 url:'/login',
@@ -13,9 +20,24 @@ export const login = (user) => {
             }
         ).then(resp => {
             console.log("resp", resp);
-            dispatch(authActions.setCredentials(resp.headers.authorization));
+            const accessToken = resp.headers.authorization;
+            dispatch(authActions.setCredentials(accessToken));
+            Send.defaults.headers.common['Authorization'] = accessToken;
+            dispatch(getUser(user));
         })
         .catch(error => console.log(error));
+    }
+}
 
+export const getUser = (user) => {
+    return function (dispatch) {
+        Send({
+            url: '/user/get',
+            method: 'post',
+            data: user,
+        }).then(resp => {
+            console.log("resp", resp);
+            dispatch(authActions.setUser(resp.data.data.username));
+        })
     }
 }

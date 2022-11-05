@@ -70,11 +70,11 @@ export function BoardWrite() {
                 title: enteredTitle,
                 content: enteredContent,
                 resortName: selectedResort,
-                create_dt: new Date(),
+                //create_dt: new Date(),
                 // 여기서부턴 백엔드와 연결 후 지울 예정
-                cnt: 0,
-                like: 0,
-                comments: [],
+                //cnt: 0,
+                //like: 0,
+                //comments: [],
             }
             dispatch(addPost(post));
             navigate("/board");

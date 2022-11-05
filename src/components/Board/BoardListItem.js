@@ -8,13 +8,12 @@ import { AiOutlineLike } from 'react-icons/ai'
 import { deletePost } from '../../action/board'
 
 function BoardListItem(props) {
-    const token = useSelector(state => state.auth.token);
     const user = useSelector(state => state.auth.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [isMine, setIsMine] = useState(false);
 
     const [timePass, setTimePass] = useState("");
-    //const [current, setCurrent] = useState(new Date());
 
     const detailDate = (create_dt) => {
         const milliSeconds = new Date() - Date.parse(create_dt);
@@ -33,6 +32,11 @@ function BoardListItem(props) {
 		const years = days / 365;
 		return `${Math.floor(years)}년 전`;
     }
+
+    const showIcon = () => {
+        if (user === props.user.username) setIsMine(true);
+    }
+
     const handlePencil = e => {
         navigate(`/board/edit/${props.id}`);
     }
@@ -47,7 +51,8 @@ function BoardListItem(props) {
     }
 
     useEffect(() => {
-        setTimePass(detailDate(props.create_dt));
+        setTimePass(detailDate(props.createDate));
+        showIcon();
     }, []);
 
     return (
@@ -55,8 +60,8 @@ function BoardListItem(props) {
             <Top>
                 <SkiName>{props.resortName}</SkiName>
                 <div>
-                    {token && <HiPencil className="boardPost-icon" onClick={handlePencil}/>}
-                    {token && <BsTrashFill className="boardPost-icon" onClick={handleTrash}/>}
+                    {isMine && <HiPencil className="boardPost-icon" onClick={handlePencil}/>}
+                    {isMine && <BsTrashFill className="boardPost-icon" onClick={handleTrash}/>}
                 </div>
             </Top>
             <Content onClick={showDetail}>
@@ -70,8 +75,8 @@ function BoardListItem(props) {
                 <Empty></Empty>
                 <Real>
                     <AiOutlineLike className="boardPost-likeIcon"/>
-                    <LikeCnt>5</LikeCnt>
-                    <div className="boardPost-bottomText">{user.username}</div>
+                    <LikeCnt>{props.likeCount}</LikeCnt>
+                    <div className="boardPost-bottomText">{props.user.username}</div>
                     <div className="boardPost-bottomText">{timePass}</div>
                 </Real>
             </Bottom>
